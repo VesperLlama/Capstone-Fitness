@@ -1,0 +1,47 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo {
+    width:15rem;
+    height: 15rem;
+    border-radius: 100%;
+}
+
+/* .left-h {
+    padding: 2rem;
+    padding-top:1.5rem;
+    flex:3;
+} */
+
+.header-menu {
+    list-style: none;
+    display :flex;
+    gap: 2rem;
+    color: white;
+}
+
+
+
+.header-menu>li:hover{
+    cursor: pointer;
+    color: var(--orange);
+    cursor: pointer;
+}
+
+/* Responsive css code with Media Query */
+@media screen and (max-width: 768px)
+{
+    .header>:nth-child(2)
+    {
+        position: fixed;
+        right: 2rem;
+        z-index: 99;
+    }
+    .header-menu{
+        flex-direction: column;
+        background-color: var(--appColor);
+        padding: 2rem;
+    }
+}

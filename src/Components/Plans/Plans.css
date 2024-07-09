@@ -1,0 +1,98 @@
+.plans-container {
+    margin-top: -4rem;
+    padding: 0.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    position: relative;
+}
+
+.plans{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.plan {
+    display: flex;
+    flex-direction: column;
+    background: var(--caloryCard);
+    color: white;
+    gap: 2rem;
+    padding: 1.5rem;
+    width: 15rem;
+
+}
+
+.plan:nth-child(2){
+    background: var(--planCard);
+}
+.plan:nth-child(4){
+    background: var(--planCard);
+}
+.plan>:nth-child(1)
+{
+    font-size: 1.5rem;
+    font-weight:bold ;
+}
+.plan>:nth-child(2)
+{
+    font-size: 1rem;
+    font-weight:bolder ;
+}
+/* .plan>:nth-child(5){
+    font-size: 0.8rem;
+} */
+
+.features{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.feature{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.feature>img{
+    width: 1rem;
+}
+
+.plans>:nth-child(1)>button{
+    color:orange;
+}
+.plans>:nth-child(2)>button{
+    color:red;
+}
+.plans>:nth-child(3)>button{
+    color:yellowgreen;
+}
+.plans>:nth-child(4)>button{
+    color:red;
+}
+.plans>:nth-child(5)>button{
+    color:orange;
+}
+.btn:hover{
+    background-color: aquamarine;
+    cursor:alias
+}
+
+
+
+/* Responsive css code with Media Query */
+@media screen and (max-width: 380px)
+{
+    .plans{
+        flex-direction: column;
+    }
+    .plan:nth-child(2){
+        transform: none;
+    }
+}
+
+
+
+
