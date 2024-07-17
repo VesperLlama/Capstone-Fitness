@@ -21,7 +21,7 @@
 .category{
     display:flex;
     flex-direction: column;
-    background-color: aqua;
+    background-color: yellowgreen;
     padding: 2rem ;
     gap:  1rem;
     color: black;

@@ -1,7 +1,8 @@
 import React from 'react'
 import './Reasons.css'
-import image1 from "../../assets/image1.png"
-import image2 from "../../assets/image2.png"
+import image1 from "./Pose-Image.png"
+// import image2 from "../../assets/image2.png"
+import image2 from "./pse2.jpg"
 import image3 from "../../assets/image3.png"
 import image4 from "../../assets/image4.png"
 import nb from "../../assets/nb.png"
@@ -20,34 +21,34 @@ const Reasons = () => {
 
 
        <div className="right-r">
-            <span>some reasons</span>
+            <span>     ----Value----</span>
 
             <div>
-                <span className="stroke-text">why </span>
-                <span>choose us  ?</span>
+                <span className="stroke-text">How </span>
+                <span>it adds Value to our Society  ?</span>
             </div>
 
             <div className='details-r'>
-                
+                       
                       <div>    
                        <img src={tick} alt=""></img>
                         <span>WE TRAIN YOUR MIND AND BODY</span>
                        </div>
-                       <div>
+                       {/* <div>
                        <img src={tick} alt="" />
                         <span>ANYONE FROM ANYWHERE CAN TRAIN FROM OUR DEFINED CURRICULUM</span>
-                       </div>
-                       <div>
+                       </div> */}
+                       {/* <div>
                        <img src={tick} alt="" />
                         <span>WE PROVIDE 1:1 GUIDANCE </span>
                        </div>
                        <div>
                        <img src={tick} alt="" />
                         <span>ANYONE AT ANY AGE CAN JOIN OUR CURRICULUM</span>
-                       </div>
+                       </div> */}
                        <div>
                        <img src={tick} alt="" />
-                        <span>DIETS ARE FREE TO ACCESS IN OUR VIFNX</span>
+                        <span>FitFusion Hub brings a transformative approach to fitness and wellness by integrating advanced FIT AI models. Our platform provides personalized training experiences that adapt to individual needs, helping users achieve their fitness goals more effectively. The AI models offer real-time corrections and feedback, ensuring proper form and reducing the risk of injury. This innovation not only enhances personal health and well-being but also promotes a more active and mindful society. By making advanced fitness solutions accessibl</span>
                        </div>
                        <div>
                        <img src={tick} alt="" />

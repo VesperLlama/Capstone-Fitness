@@ -5,9 +5,11 @@ export const Plans = () => {
   return (
       <div className="plans-container">
         <div className="programs-header" style={{gap: '2rem'}}>
-            <span className='stroke-text'>Transform Your Life :</span>
-            <span>Choose</span>
-            <span className='stroke-text'>Our Diet Plan</span>
+        {/* TRANSFORM YOUR LIFE WITH FITFUSION: */}
+        {/* EMBRACE OUR REVITALIZING DIET PLAN */}
+            <span className='stroke-text'>Transform Your Life With:</span>
+            <span>FitFusion</span>
+            <span className='stroke-text'>EMBRACE OUR REVITALIZING DIET PLAN </span>
         </div>
 
            {/* Plans card */}

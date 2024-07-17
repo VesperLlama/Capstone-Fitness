@@ -6,9 +6,9 @@ export const TrainersData = [
   {
     image: image1,
     review:
-      "Welcome to the world of fitness and strength with Mainak Kundu! I'm Maxx, a dedicated Martial Arts Specialist and Personal Gym Trainer, blending the precision of martial arts with the science of fitness. With an athletic physique and a unique fusion of strength and flexibility, I bring a dynamic approach to training. Beyond my passion for fitness, I'm also a Computer Science Engineering student at VIT Bhopal, specializing in MERN Stack FrontEnd and Software Development. Explore the MAXX MOVES experience – where physical prowess meets technological innovation. Follow my journey on Instagram @maxxmovess and YouTube at MAXXMOVESS.",
+      "Welcome to the world of fitness and strength with Mainak Kundu! I'm Maxx, a dedicated Martial Arts Specialist and Personal Gym Trainer, blending the precision of martial arts with the science of fitness. With an athletic physique and a unique fusion of strength and flexibility, I bring a dynamic approach to training. Beyond my passion for fitness, I'm also a Computer Science Engineering student at VIT Bhopal, specializing in MERN Stack FrontEnd and Software Development. Explore the MAXX MOVES experience – where physical prowess meets technological innovation.",
     name: 'MAINAK KUNDU (MAXX)',
-    status : 'FOUNDER (PERSONAL TRAINER)'
+    status : 'TRAINER'
   },
   {
     image: image2,
