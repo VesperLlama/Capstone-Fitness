@@ -20,12 +20,8 @@ export const Join = () => {
          <div className="left-j">
             <hr />
             <div>
-                <span class='stroke-text'>READY TO</span>
-                <span> MAXIMIZE</span>
-            </div>
-            <div>
-                <span>YOUR FITNESS MOVESS</span>
-                <span class='stroke-text'> WITH US ?</span>
+                <span>READY FOR A</span>
+                <span class='stroke-text'> CHANGE?</span>
             </div>
          </div>
 

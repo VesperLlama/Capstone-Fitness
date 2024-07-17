@@ -3,7 +3,7 @@ import './Footer.css'
 import Instagram from '../../assets/instagram.png'
 import LinkedIn from '../../assets/linkedin.png'
 import Github from '../../assets/github.png'
-import FitLogo from '../../Components/Hero/Header/FitLogo.png'
+import FitLogo from '../../Components/Hero/Header/VIFNXlogo.webp'
 
 export const Footer = () => {
   return (

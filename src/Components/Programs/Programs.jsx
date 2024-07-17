@@ -8,8 +8,8 @@ const Programs = () => {
         {/* Header */}
         <div className="programs-header">
             <span className='stroke-text'>Explore our</span>
-            <span>1:1-Programs</span>
-            <span className='stroke-text'>to shape you</span>
+            <span>Fit AI</span>
+            <span className='stroke-text'>Models</span>
         </div>
 
         <div className="program-categories">

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './Header.css'
-import Logo from  './VIFNXlogo.png'
+import Logo from  './VIFNXlogo.webp'
 import Bars from '../../../assets/bars.png'
 import { Link }  from "react-scroll";
 const Header = () => {
@@ -65,11 +65,11 @@ const Header = () => {
             Plans</Link>
         </li>
         <li><Link 
-              onClick={()=>setMenuOpened(false)}
+             onClick={()=>setMenuOpened(false)}
              to='Testimonials'
              span={true}
              smooth={true}
-          >Testimonials</Link></li>
+          >Clients</Link></li>
       </ul>
   )}
 </div>
