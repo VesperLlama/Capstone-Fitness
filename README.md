@@ -1,1 +1,1 @@
-# VIFNX-ACADEMY
+# Capstone Fitness
