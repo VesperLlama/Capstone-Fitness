@@ -1,5 +1,4 @@
 import React from 'react'
-import Header from './Header/Header'
 import Heart  from './Header/Img/heart.png'
 import hero_image from './Header/Img/tree_pose.jpg'
 
@@ -17,8 +16,6 @@ const Hero = () =>
 
       <div className="blur hero-blur"></div>
         <div className="left-h">
-
-          <Header/>
 {/* the best ad */}
           <div className="the-best-ad">
             {/* <div></div> */}
