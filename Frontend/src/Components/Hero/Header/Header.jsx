@@ -81,7 +81,7 @@ const Header = () => {
             </Link>
           </li>
           <li>
-            <LinkRoute to="/dumbell">Dumbell</LinkRoute>
+            <LinkRoute className="LinkRoute" to="/dumbell">Dumbell</LinkRoute>
           </li>
         </ul>
       )}

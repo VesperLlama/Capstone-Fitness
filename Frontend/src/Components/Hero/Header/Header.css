@@ -4,8 +4,8 @@
 }
 
 .logo {
-    width:15rem;
-    height: 15rem;
+    width:10rem;
+    height: 10rem;
     border-radius: 100%;
 }
 
@@ -20,14 +20,22 @@
     display :flex;
     gap: 2rem;
     color: white;
+    padding-right: 2rem;
 }
 
+.LinkRoute {
+    color: white;
+    text-decoration: none;
+}
 
+.LinkRoute:hover {
+    cursor: pointer;
+    color: var(--orange);
+}
 
 .header-menu>li:hover{
     cursor: pointer;
     color: var(--orange);
-    cursor: pointer;
 }
 
 /* Responsive css code with Media Query */
@@ -42,6 +50,6 @@
     .header-menu{
         flex-direction: column;
         background-color: var(--appColor);
-        padding: 2rem;
+        /* padding: 2rem; */
     }
 }

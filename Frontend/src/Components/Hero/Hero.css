@@ -120,7 +120,7 @@
     border-radius: 5px;
     position: absolute;
     right: 4rem;
-    top: 7rem;
+    top: 6rem;
  }
  
  .heart-rate>img{
@@ -138,10 +138,11 @@
 
 .hero-image {
     position: absolute;
-    top: 20rem;
+    top: 5rem;
     right : 8rem;
     width:23rem;
     border-radius: 50%;
+    z-index: -1;
 }
 
 .hero-image-back{

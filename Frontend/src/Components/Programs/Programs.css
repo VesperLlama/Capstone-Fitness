@@ -21,6 +21,7 @@
 .category{
     display:flex;
     flex-direction: column;
+    flex: 1;
     background-color: yellowgreen;
     padding: 2rem ;
     gap:  1rem;
@@ -33,7 +34,7 @@
     height: 2rem; fill:black;
 }
 .category>:nth-child(2){
-    width: 1rem;
+    width: 10rem;
     font-weight: bold;
 }
 .category>:nth-child(3){

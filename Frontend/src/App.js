@@ -14,7 +14,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 function App() {
   const location = useLocation();
   const isDumbellPage = location.pathname === "/dumbell";
-  const isHomePage = location.pathname === "/home";
+  const isHomePage = location.pathname === "/";
 
   return (
     <div className="App">
@@ -25,7 +25,7 @@ function App() {
         {isHomePage && (
           <>
             <Route
-              path="/home"
+              path="/"
               element={
                 <>
                   <Hero />
