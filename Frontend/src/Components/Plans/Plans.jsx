@@ -18,7 +18,7 @@ export const Plans = () => {
                 <div className="plan">
                     {plansData.icon}
                     <span>{plan.name}</span>
-                    <span>$ {plan.price}</span>
+                    <span>₹ {plan.price}</span>
 
 
                     <div className="features">

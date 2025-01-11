@@ -3,7 +3,7 @@
 }
 
 .Footer-container>hr{
-    bordrer: 1px solid var(--orange);
+    border: 1px solid var(--orange);
 }
 .footer {
     padding: 1rem 2rem;

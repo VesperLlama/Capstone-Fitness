@@ -17,5 +17,5 @@ app.add_middleware(
 @app.post("/api/dumbell")
 async def dumbell(file: UploadFile = File(...)):
     contents = await file.read()
-    img_str = process_frame(contents)
-    return JSONResponse(content={"image": f"data:image/jpeg;base64,{img_str}"})
+    img_str, count = process_frame(contents)
+    return JSONResponse(content={"image": f"data:image/jpeg;base64,{img_str}", "count": count})
