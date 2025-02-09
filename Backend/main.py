@@ -1,6 +1,9 @@
 from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
+import jwt
+from dotenv import load_dotenv
+from pymongo import MongoClient
 from dumbell_curl import process_frame
 
 app = FastAPI()
@@ -14,8 +17,25 @@ app.add_middleware(
 )
 
 
-@app.post("/api/dumbell")
+@app.post("/register")
+async def register():
+    return True
+
+
+@app.post("/login")
+async def login():
+    return True
+
+
+@app.post("/addData")
+async def addData():
+    pass
+
+
+@app.post("/dumbell")
 async def dumbell(file: UploadFile = File(...)):
     contents = await file.read()
     img_str, count = process_frame(contents)
-    return JSONResponse(content={"image": f"data:image/jpeg;base64,{img_str}", "count": count})
+    return JSONResponse(
+        content={"image": f"data:image/jpeg;base64,{img_str}", "count": count}
+    )
