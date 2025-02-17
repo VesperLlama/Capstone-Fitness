@@ -16,3 +16,4 @@ class loginSchema(BaseModel):
 class exerciseSchema(BaseModel):
     userID: str
     count: int
+    exercise: str

@@ -62,7 +62,7 @@ const VideoStream = () => {
     const formData = new FormData();
     formData.append("file", imageBlob, "frame.jpg");
 
-    const response = await fetch("http://localhost:8000/api/dumbell", {
+    const response = await fetch("http://localhost:8000/cv/dumbell", {
       method: "POST",
       body: formData,
     });

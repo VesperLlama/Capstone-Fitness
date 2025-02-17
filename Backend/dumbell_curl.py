@@ -3,6 +3,7 @@ import mediapipe as mp
 import numpy as np
 import math
 import base64
+import time
 
 mp_drawing = mp.solutions.drawing_utils
 mp_pose = mp.solutions.pose
@@ -40,7 +41,7 @@ def calculate_angle(img, p1, p2, p3, lmList):
     )
     return angle
 
-
+start_time = time.time()
 # Curl counter variables
 counter = 0
 count = 0
@@ -58,8 +59,12 @@ def process_frame(contents):
     img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
 
     # Recolor image to RGB
-    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    img = cv2.cvtColor(cv2.flip(img, 1), cv2.COLOR_BGR2RGB)
     results = pose.process(img)
+    img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+
+    elapsed_time = time.time() - start_time
+    timer_text = f"Time: {int(elapsed_time)} sec"
 
     if results.pose_landmarks:
         lmList = []
@@ -70,27 +75,25 @@ def process_frame(contents):
 
         if len(lmList) != 0:
             # Calculate angle
-            angle = calculate_angle(img, 12, 14, 16, lmList)
+            angle = calculate_angle(img, 11, 13, 15, lmList)
+            angle_shoulder = calculate_angle(img, 13, 11, 23, lmList)
 
             per = np.interp(angle, (210, 310), (0, 100))
             bar = np.interp(angle, (220, 310), (h * 0.9, h * 0.1))
 
             # Check for dumbbell curls
             color = (255, 0, 255)
-            if per == 100:
-                color = (0, 255, 0)
-                if dir == 0:
-                    count = 0.5
-                    dir = 1
-                else:
-                    count = 0
-            if per == 0:
-                color = (0, 255, 0)
-                if dir == 1:
-                    count = 0.5
-                    dir = 0
-                else:
-                    count = 0
+            if angle_shoulder>=0 and angle_shoulder<=20:
+                if per == 100:
+                    color = (0, 255, 0)
+                    if dir == 0:
+                        count += 0.5
+                        dir = 1
+                if per == 0:
+                    color = (0, 255, 0)
+                    if dir == 1:
+                        count += 0.5
+                        dir = 0
 
             # Draw the bar
             bar_x_start = int(w * 0.9)
@@ -105,19 +108,59 @@ def process_frame(contents):
                 color,
                 cv2.FILLED,
             )
-            cv2.putText(
-                img,
-                f"{int(per)} %",
-                (int(w * 0.88), int(h * 0.05)),
-                cv2.FONT_HERSHEY_PLAIN,
-                2,
-                color,
-                2,
-            )
+            cv2.putText(img, f'{int(per)}%', (int(w * 0.88), int(h * 0.05)), cv2.FONT_HERSHEY_SIMPLEX, 
+                            0.8, color, 2, cv2.LINE_AA)
+            
+            # Draw the background rectangle dynamically
+            count_text = str(int(count))
+            font = cv2.FONT_HERSHEY_SIMPLEX
+            font_scale = 3
+            thickness = 5
+
+            # Calculate text size
+            text_size = cv2.getTextSize(count_text, font, font_scale, thickness)[0]
+
+            # Define box padding
+            padding_x, padding_y = 20, 20  # Adjust as needed
+            box_x, box_y = 30, 600  # Top-left position of the box
+            box_width = text_size[0] + 2 * padding_x
+            box_height = text_size[1] + 2 * padding_y
+
+            # Draw the background rectangle
+            cv2.rectangle(img, (box_x, box_y), (box_x + box_width, box_y + box_height), (0, 0, 0), cv2.FILLED)
+
+            # Calculate text position (centered inside the box)
+            text_x = box_x + padding_x
+            text_y = box_y + text_size[1] + padding_y
+
+            # Draw the count text
+            cv2.putText(img, count_text, (text_x, text_y), font, font_scale, (0, 255, 0), thickness)
+
+
+            # Calculate text size
+            font = cv2.FONT_HERSHEY_SIMPLEX
+            font_scale = 1
+            thickness = 2
+            text_size = cv2.getTextSize(timer_text, font, font_scale, thickness)[0]
+            
+            # Define box padding
+            padding = 10
+            x, y = 30, 40  # Top-left corner
+            box_width = text_size[0] + 2 * padding
+            box_height = text_size[1] + 2 * padding
+
+            # Draw the background rectangle
+            cv2.rectangle(img, (x, y - text_size[1] - padding), (x + box_width, y + padding), (0, 0, 0), -1)
+
+            # Draw the text
+            cv2.putText(img, timer_text, (x + padding, y), font, font_scale, (0, 255, 0), thickness, cv2.LINE_AA)
 
     # Convert back to BGR for displaying in OpenCV
-    img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+    # img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
     
+    end_time = time.time()
+    total_time = end_time - start_time
+
     _, buffer = cv2.imencode(".jpg", img)
     img_str = base64.b64encode(buffer).decode("utf-8")
     return img_str, count

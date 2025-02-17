@@ -32,7 +32,7 @@ async def addData():
     pass
 
 
-@app.post("/dumbell")
+@app.post("/cv/dumbell")
 async def dumbell(file: UploadFile = File(...)):
     contents = await file.read()
     img_str, count = process_frame(contents)
