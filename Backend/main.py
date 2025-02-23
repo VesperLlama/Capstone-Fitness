@@ -4,7 +4,8 @@ from fastapi.middleware.cors import CORSMiddleware
 import jwt
 from dotenv import load_dotenv
 from pymongo import MongoClient
-from dumbell_curl import process_frame
+from CV_models.dumbell_curl import process_frame
+from CV_models.Shoulderpress import process_frame
 
 app = FastAPI()
 
@@ -34,6 +35,15 @@ async def addData():
 
 @app.post("/cv/dumbell")
 async def dumbell(file: UploadFile = File(...)):
+    contents = await file.read()
+    img_str, count = process_frame(contents)
+    return JSONResponse(
+        content={"image": f"data:image/jpeg;base64,{img_str}", "count": count}
+    )
+
+
+@app.post("/cv/shldpress")
+async def shoulderPress(file: UploadFile = File(...)):
     contents = await file.read()
     img_str, count = process_frame(contents)
     return JSONResponse(

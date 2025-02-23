@@ -3,7 +3,6 @@ import mediapipe as mp
 import numpy as np
 import math
 import base64
-import time
 
 mp_drawing = mp.solutions.drawing_utils
 mp_pose = mp.solutions.pose
@@ -41,7 +40,6 @@ def calculate_angle(img, p1, p2, p3, lmList):
     )
     return angle
 
-start_time = time.time()
 # Curl counter variables
 counter = 0
 count = 0
@@ -62,9 +60,6 @@ def process_frame(contents):
     img = cv2.cvtColor(cv2.flip(img, 1), cv2.COLOR_BGR2RGB)
     results = pose.process(img)
     img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
-
-    elapsed_time = time.time() - start_time
-    timer_text = f"Time: {int(elapsed_time)} sec"
 
     if results.pose_landmarks:
         lmList = []
@@ -153,13 +148,10 @@ def process_frame(contents):
             cv2.rectangle(img, (x, y - text_size[1] - padding), (x + box_width, y + padding), (0, 0, 0), -1)
 
             # Draw the text
-            cv2.putText(img, timer_text, (x + padding, y), font, font_scale, (0, 255, 0), thickness, cv2.LINE_AA)
+            # cv2.putText(img, timer_text, (x + padding, y), font, font_scale, (0, 255, 0), thickness, cv2.LINE_AA)
 
     # Convert back to BGR for displaying in OpenCV
     # img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
-    
-    end_time = time.time()
-    total_time = end_time - start_time
 
     _, buffer = cv2.imencode(".jpg", img)
     img_str = base64.b64encode(buffer).decode("utf-8")

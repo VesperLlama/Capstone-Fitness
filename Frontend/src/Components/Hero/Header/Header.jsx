@@ -83,6 +83,9 @@ const Header = () => {
           <li>
             <LinkRoute className="LinkRoute" to="/dumbell">Dumbell</LinkRoute>
           </li>
+          <li>
+            <LinkRoute className="LinkRoute" to="/shld">Shoulder Press</LinkRoute>
+          </li>
         </ul>
       )}
     </div>

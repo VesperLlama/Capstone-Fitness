@@ -9,11 +9,13 @@ import Reasons from "./Components/Reasons/Reasons";
 import { Testimonials } from "./Components/Testimonials/Testimonials";
 import { Trainers } from "./Components/Trainers/Trainers";
 import VideoStream from "./Components/CV/Dumbell";
+import Shld_Press from "./Components/CV/Shld_Press" ;
 import { Routes, Route, useLocation } from "react-router-dom";
 
 function App() {
   const location = useLocation();
   const isDumbellPage = location.pathname === "/dumbell";
+  const isShldPressPage = location.pathname === "/shld";
   const isHomePage = location.pathname === "/";
 
   return (
@@ -22,6 +24,7 @@ function App() {
 
       <Routes>
         {isDumbellPage && <Route path="/dumbell" element={<VideoStream />} />}
+        {isShldPressPage && <Route path="/shld" element={<Shld_Press />} />}
         {isHomePage && (
           <>
             <Route
