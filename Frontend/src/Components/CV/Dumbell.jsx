@@ -2,11 +2,10 @@ import React, { useRef, useEffect, useState } from "react";
 import Container from "@mui/material/Container";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
-import "./Dumbell.css";
 import noCamera from "../../assets/noCamera.png";
 import { Button } from "@mui/material";
 
-const VideoStream = () => {
+const Dumbell = () => {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const [processedImage, setProcessedImage] = useState(noCamera);
@@ -239,4 +238,4 @@ const VideoStream = () => {
   );
 };
 
-export default VideoStream;
+export default Dumbell;

@@ -8,45 +8,40 @@ import Programs from "./Components/Programs/Programs";
 import Reasons from "./Components/Reasons/Reasons";
 import { Testimonials } from "./Components/Testimonials/Testimonials";
 import { Trainers } from "./Components/Trainers/Trainers";
-import VideoStream from "./Components/CV/Dumbell";
-import Shld_Press from "./Components/CV/Shld_Press" ;
-import { Routes, Route, useLocation } from "react-router-dom";
+import CVTabs from "./Components/CV/CVModels";
+import { Routes, Route } from "react-router-dom";
+import Dumbell from "./Components/CV/Dumbell";
+import ShldPress from "./Components/CV/Shld_Press";
 
 function App() {
-  const location = useLocation();
-  const isDumbellPage = location.pathname === "/dumbell";
-  const isShldPressPage = location.pathname === "/shld";
-  const isHomePage = location.pathname === "/";
-
   return (
-    <div className="App">
-      <Header />
+    <>
+      <div className="App">
+        <Header />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <Hero />
+                <Programs />
+                <Reasons />
+                <Plans />
+                <Testimonials />
+                <Trainers />
+                <Join />
+              </>
+            }
+          />
+          <Route path="/train/*" element={<CVTabs />} >
+            <Route path="dumbell" element={<Dumbell />} />
+            <Route path="shld" element={<ShldPress />} />
+          </Route>
+        </Routes>
 
-      <Routes>
-        {isDumbellPage && <Route path="/dumbell" element={<VideoStream />} />}
-        {isShldPressPage && <Route path="/shld" element={<Shld_Press />} />}
-        {isHomePage && (
-          <>
-            <Route
-              path="/"
-              element={
-                <>
-                  <Hero />
-                  <Programs />
-                  <Reasons />
-                  <Plans />
-                  <Testimonials />
-                  <Trainers />
-                  <Join />
-                </>
-              }
-            />
-          </>
-        )}
-      </Routes>
-
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </>
   );
 }
 

@@ -81,10 +81,7 @@ const Header = () => {
             </Link>
           </li>
           <li>
-            <LinkRoute className="LinkRoute" to="/dumbell">Dumbell</LinkRoute>
-          </li>
-          <li>
-            <LinkRoute className="LinkRoute" to="/shld">Shoulder Press</LinkRoute>
+            <LinkRoute className="LinkRoute" to="/train">Train</LinkRoute>
           </li>
         </ul>
       )}
