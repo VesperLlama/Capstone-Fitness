@@ -47,7 +47,6 @@ dir = 0
 
 def process_frame(contents):
     global count, dir, pose
-    # ret, frame = cap.read()
     nparr = np.frombuffer(contents, np.uint8)
     frame = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
 
@@ -55,7 +54,7 @@ def process_frame(contents):
     results = pose.process(frame)
     # frame = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
 
-    h, w, c = frame.shape
+    height, width, _ = frame.shape
 
     if results.pose_landmarks:
         lmList = [
@@ -69,9 +68,9 @@ def process_frame(contents):
             shldr_angle_right = calculate_angle(frame, 14, 12, 24, lmList)
 
             per_left = np.interp(angle_right, (70, 125), (100, 0))
-            bar_left = np.interp(angle_right, (75, 125), (100, w * 0.9))
+            bar_left = np.interp(angle_right, (75, 125), (100, height * 0.9))
             per_right = np.interp(angle_left, (70, 125), (100, 0))
-            bar_right = np.interp(angle_left, (75, 125), (100, w * 0.9))
+            bar_right = np.interp(angle_left, (75, 125), (100, height * 0.9))
 
             color_right, color_left = (255, 0, 255), (255, 0, 255)
             if (shldr_angle_left >= 85 and shldr_angle_left <= 170) and (
@@ -88,31 +87,30 @@ def process_frame(contents):
                         count += 0.5
                         dir = 0
 
-            # Draw Progress Bars
-            bar_x_start = int(w * 0.9)
-            bar_x_end = int(w * 0.95)
+            x_right = int(width * 0.90)
+            x_right_end = int(width * 0.94)
+
+            x_left = int(width * 0.04)
+            x_left_end = int(width * 0.08)
+
+            y_top = int(height * 0.14)
+            y_bottom = int(height * 0.95)
 
             # Right Bar
             cv2.rectangle(
-                frame,
-                (bar_x_start, int(h * 0.1)),
-                (bar_x_start, bar_x_end),
-                color_right,
-                3,
+                frame, (x_right, y_top), (x_right_end, y_bottom), color_right, 3
             )
             cv2.rectangle(
                 frame,
-                (bar_x_start, int(bar_right)),
-                (bar_x_end, int(h * 0.9)),
+                (x_right, int(bar_right)),
+                (x_right_end, y_bottom),
                 color_right,
                 cv2.FILLED,
             )
-
-            # Adjusted percentage position to align perfectly on top of the bar
             cv2.putText(
                 frame,
                 f"{int(per_right)}%",
-                (bar_x_start, 90),
+                (x_right - 15, y_top - 10),
                 cv2.FONT_HERSHEY_SIMPLEX,
                 0.8,
                 color_right,
@@ -121,14 +119,18 @@ def process_frame(contents):
             )
 
             # Left Bar
-            cv2.rectangle(frame, (50, 100), (100, bar_x_end), color_left, 3)
+            cv2.rectangle(frame, (x_left, y_top), (x_left_end, y_bottom), color_left, 3)
             cv2.rectangle(
-                frame, (50, int(bar_left)), (100, bar_x_end), color_left, cv2.FILLED
+                frame,
+                (x_left, int(bar_left)),
+                (x_left_end, y_bottom),
+                color_left,
+                cv2.FILLED,
             )
             cv2.putText(
                 frame,
                 f"{int(per_left)}%",
-                (50, 90),
+                (x_left - 5, y_top - 10),
                 cv2.FONT_HERSHEY_SIMPLEX,
                 0.8,
                 color_left,
@@ -141,15 +143,6 @@ def process_frame(contents):
             font_scale = 1
             thickness = 2
             padding_x, padding_y = 10, 10
-            # text_size = cv2.getTextSize(timer_text, font, font_scale, thickness)[0]
-            # box_x, box_y = 10, 10
-            # box_width = text_size[0] + 2 * padding_x
-            # box_height = text_size[1] + 2 * padding_y
-
-            # cv2.rectangle(frame, (box_x, box_y), (box_x + box_width, box_y + box_height), (0, 0, 0), cv2.FILLED)
-            # text_x = box_x + padding_x
-            # text_y = box_y + text_size[1] + padding_y
-            # cv2.putText(frame, timer_text, (text_x, text_y), font, font_scale, (0, 255, 0), thickness)
 
             # Enhanced Curl Count Box
             count_text = str(int(count))

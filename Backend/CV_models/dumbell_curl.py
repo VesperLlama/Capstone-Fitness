@@ -133,19 +133,19 @@ def process_frame(contents):
 
 
             # Calculate text size
-            font = cv2.FONT_HERSHEY_SIMPLEX
-            font_scale = 1
-            thickness = 2
-            text_size = cv2.getTextSize(timer_text, font, font_scale, thickness)[0]
+            # font = cv2.FONT_HERSHEY_SIMPLEX
+            # font_scale = 1
+            # thickness = 2
+            # text_size = cv2.getTextSize(timer_text, font, font_scale, thickness)[0]
             
             # Define box padding
-            padding = 10
-            x, y = 30, 40  # Top-left corner
-            box_width = text_size[0] + 2 * padding
-            box_height = text_size[1] + 2 * padding
+            # padding = 10
+            # x, y = 30, 40  # Top-left corner
+            # box_width = text_size[0] + 2 * padding
+            # box_height = text_size[1] + 2 * padding
 
-            # Draw the background rectangle
-            cv2.rectangle(img, (x, y - text_size[1] - padding), (x + box_width, y + padding), (0, 0, 0), -1)
+            # # Draw the background rectangle
+            # cv2.rectangle(img, (x, y - text_size[1] - padding), (x + box_width, y + padding), (0, 0, 0), -1)
 
             # Draw the text
             # cv2.putText(img, timer_text, (x + padding, y), font, font_scale, (0, 255, 0), thickness, cv2.LINE_AA)
