@@ -11,7 +11,7 @@
   background-color: whitesmoke;
   height: 40rem;
   border-radius: 25px;
-  border: 4px solid #ff9800;
+  border: 4px solid var(--orange);
 }
 
 .data {

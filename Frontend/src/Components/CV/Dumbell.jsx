@@ -164,7 +164,12 @@ const Dumbell = () => {
 
         {processedImage && (
           <img
-            style={{ alignItems: "center", justifyContent: "center" }}
+            style={{
+              alignItems: "center",
+              justifyContent: "center",
+              width: "640px",
+              height: "480px",
+            }}
             src={processedImage}
             alt="Camera Feed"
           />

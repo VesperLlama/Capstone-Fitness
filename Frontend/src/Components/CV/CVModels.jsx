@@ -4,7 +4,7 @@ import { Tabs, Tab, Box } from "@mui/material";
 import { Link, Outlet } from "react-router-dom";
 
 const CVTabs = () => {
-  const [value, setValue] = React.useState(1);
+  const [value, setValue] = React.useState(0);
 
   const handleChange = (e, newValue) => {
     setValue(newValue);
@@ -19,8 +19,8 @@ const CVTabs = () => {
         indicatorColor="secondary"
         sx={{
           "& .MuiTab-root": { color: "white", fontSize: "larger" },
-          "& .Mui-selected": { color: "#ff9800" },
-          "& .MuiTabs-indicator": { backgroundColor: "#ff9800" },
+          "& .Mui-selected": { color: "var(--orange)" },
+          "& .MuiTabs-indicator": { backgroundColor: "var(--orange)" },
         }}
         centered
       >

@@ -69,7 +69,7 @@ const ShldPress = () => {
     if (response.ok) {
       const data = await response.json();
       setProcessedImage(data.image);
-
+      console.log(data.count);
       setCount((prevCount) => prevCount + data.count);
     } else {
       console.error("Error processing frame:", response.statusText);

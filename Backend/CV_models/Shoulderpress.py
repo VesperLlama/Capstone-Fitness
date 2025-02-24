@@ -40,13 +40,11 @@ mp_drawing = mp.solutions.drawing_utils
 mp_pose = mp.solutions.pose
 pose = mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5)
 
-counter = 0
-count = 0
-dir = 0
-
 
 def process_frame(contents):
-    global count, dir, pose
+    global pose
+    count = 0
+    dir = 0
     nparr = np.frombuffer(contents, np.uint8)
     frame = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
 
@@ -79,12 +77,12 @@ def process_frame(contents):
                 if per_right == 100 and per_left == 100:
                     color_right = color_left = (0, 255, 0)
                     if dir == 0:
-                        count += 0.5
+                        count = 0.5
                         dir = 1
                 if per_right == 0 and per_left == 0:
                     color_right = color_left = (0, 255, 0)
                     if dir == 1:
-                        count += 0.5
+                        count = 0.5
                         dir = 0
 
             x_right = int(width * 0.90)
