@@ -33,7 +33,7 @@ function App() {
               </>
             }
           />
-          <Route path="/train/*" element={<CVTabs />} >
+          <Route path="/exercise/*" element={<CVTabs />} >
             <Route path="dumbell" element={<Dumbell />} />
             <Route path="shld" element={<ShldPress />} />
           </Route>
