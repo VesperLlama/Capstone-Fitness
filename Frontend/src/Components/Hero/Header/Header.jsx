@@ -4,13 +4,27 @@ import Logo from "./VIFNXlogo.webp";
 import Bars from "../../../assets/bars.png";
 import { Link } from "react-scroll";
 import { Link as LinkRoute } from "react-router-dom";
+import Modal from "@mui/material/Modal";
+import SignIn from "../../Account/SignIn";
+import SignUp from "../../Account/SignUp";
 
 const Header = () => {
   const mobile = window.innerWidth <= 768 ? true : false;
   const [menuOpened, setMenuOpened] = useState(false);
+  const [modal, setModal] = useState(false);
+  const [isSignIn, setIsSignIn] = useState(true);
+  const handleOpen = () => setModal(true);
+  const handleClose = () => setModal(false);
+  const switchToSignUp = () => setIsSignIn(false);
+  const switchToSignIn = () => setIsSignIn(true);
 
   return (
     <div className="header">
+      <Modal open={modal} onClose={handleClose}>
+        <div onClick={(e) => e.stopPropagation()}>
+          {isSignIn ? <SignIn switchToSignUp={switchToSignUp} /> : <SignUp switchToSignIn={switchToSignIn} />}
+        </div>
+      </Modal>
       <img src={Logo} alt="" className="logo" />
       {menuOpened === false && mobile === true ? (
         <div
@@ -81,7 +95,12 @@ const Header = () => {
             </Link>
           </li>
           <li>
-            <LinkRoute className="LinkRoute" to="/Exercise">Exercise</LinkRoute>
+            <LinkRoute className="LinkRoute" to="/Exercise">
+              Exercise
+            </LinkRoute>
+          </li>
+          <li>
+            <Link onClick={handleOpen}>Sign In</Link>
           </li>
         </ul>
       )}
