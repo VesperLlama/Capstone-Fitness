@@ -1,13 +1,16 @@
-from fastapi import FastAPI, File, UploadFile
-from fastapi.responses import JSONResponse
+from fastapi import FastAPI, File, UploadFile, Form
+from fastapi.responses import Response, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 import jwt
+import os
 from dotenv import load_dotenv
 from pymongo import MongoClient
+from models.userModel import registerSchema, loginSchema, exerciseSchema
 from CV_models.dumbell_curl import process_frame as dumbbell
 from CV_models.Shoulderpress import process_frame as shldpress
 
 app = FastAPI()
+load_dotenv()
 
 app.add_middleware(
     CORSMiddleware,
@@ -17,15 +20,37 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+client = MongoClient(os.getenv("DB_URL"))
+db = client["fitfusion"]
+users = db["users"]
+secret = os.getenv("key")
+
 
 @app.post("/register")
-async def register():
-    return True
+def register(data: registerSchema) -> Response:
+    print(data)
+    existing_user = users.find_one({"email": data.email}, {"_id": 0})
+    if existing_user:
+        return JSONResponse(content={"message": "Email already exists"})
+
+    users.insert_one(data.dict())
+    return JSONResponse(content={"message": "Account created successfully!"})
 
 
 @app.post("/login")
-async def login():
-    return True
+def login(data: loginSchema):
+    user = users.find_one({"email": data.email, "password": data.password})
+    if not user:
+        return JSONResponse(content={"message": "User does not exist."})
+    else:
+        token = jwt.encode({"Email": data.email}, secret, algorithm="HS256")
+        return JSONResponse(
+            content={
+                "message": "Logged in successfully!",
+                "token": token,
+                "email": data.email,
+            }
+        )
 
 
 @app.post("/addData")

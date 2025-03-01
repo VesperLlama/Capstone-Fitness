@@ -5,6 +5,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+import Snackbar from "@mui/material/Snackbar";
 import Stack from "@mui/material/Stack";
 import MuiCard from "@mui/material/Card";
 import { styled } from "@mui/material/styles";
@@ -17,8 +18,8 @@ const Card = styled(MuiCard)(({ theme }) => ({
   padding: theme.spacing(4),
   gap: theme.spacing(2),
   margin: "auto",
-//   backgroundColor: "#121212",
-//   color: "white",
+  //   backgroundColor: "#121212",
+  //   color: "white",
   boxShadow:
     "hsla(220, 30%, 5%, 0.05) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.05) 0px 15px 35px -5px",
   [theme.breakpoints.up("sm")]: {
@@ -38,7 +39,7 @@ const SignUpContainer = styled(Stack)(({ theme }) => ({
     padding: theme.spacing(4),
   },
   backgroundColor: "transparent",
-  pallete: {mode: "dark",},
+  pallete: { mode: "dark" },
   "&::before": {
     content: '""',
     display: "block",
@@ -55,6 +56,10 @@ export default function SignUp({ switchToSignIn }) {
   const [passwordErrorMessage, setPasswordErrorMessage] = React.useState("");
   const [nameError, setNameError] = React.useState(false);
   const [nameErrorMessage, setNameErrorMessage] = React.useState("");
+  const [openSnack, setOpenSnack] = React.useState(false);
+  const [snackMessage, setSnackMessage] = React.useState(
+    "Account created successfully!"
+  );
 
   const validateInputs = () => {
     const email = document.getElementById("email");
@@ -93,17 +98,37 @@ export default function SignUp({ switchToSignIn }) {
     return isValid;
   };
 
+  function sleep(delay) {
+    return new Promise((res) => setTimeout(res, delay));
+  }
+
   const handleSubmit = (event) => {
+    event.preventDefault();
     if (nameError || emailError || passwordError) {
-      event.preventDefault();
       return;
     }
     const data = new FormData(event.currentTarget);
-    console.log({
-      name: data.get("name"),
-      lastName: data.get("lastName"),
-      email: data.get("email"),
-      password: data.get("password"),
+
+    fetch("http://localhost:8000/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: data.get("name"),
+        email: data.get("email"),
+        password: data.get("password"),
+      }),
+    }).then(async (res) => {
+      if (res.ok) {
+        const result = await res.json();
+        setOpenSnack(true);
+        setSnackMessage(result.message);
+        if (result.message === "Account created successfully!") {
+          await sleep(2000);
+          window.location.reload();
+        }
+      }
     });
   };
 
@@ -136,7 +161,7 @@ export default function SignUp({ switchToSignIn }) {
                 fullWidth
                 label="Full Name"
                 id="name"
-                placeholder="Jon Snow"
+                placeholder="Name"
                 error={nameError}
                 helperText={nameErrorMessage}
                 color={nameError ? "error" : "primary"}
@@ -190,6 +215,12 @@ export default function SignUp({ switchToSignIn }) {
             </Typography>
           </Box>
         </Card>
+        <Snackbar
+          open={openSnack}
+          autoHideDuration={4000}
+          onClose={() => setOpenSnack(false)}
+          message={snackMessage}
+        />
       </SignUpContainer>
     </>
   );

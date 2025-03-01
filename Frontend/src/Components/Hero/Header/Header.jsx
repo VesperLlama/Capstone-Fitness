@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Header.css";
 import Logo from "./VIFNXlogo.webp";
 import Bars from "../../../assets/bars.png";
@@ -18,11 +18,29 @@ const Header = () => {
   const switchToSignUp = () => setIsSignIn(false);
   const switchToSignIn = () => setIsSignIn(true);
 
+  const [loggedIn, setLoggedIn] = useState(true);
+
+  useEffect(() => {
+    if (localStorage.getItem("loggedInEmail") === null) {
+      setLoggedIn(false);
+    } else setLoggedIn(true);
+  }, []);
+
+  const logout = () => {
+    localStorage.removeItem("loggedInEmail");
+    localStorage.removeItem("token");
+    window.location.reload();
+  };
+
   return (
     <div className="header">
       <Modal open={modal} onClose={handleClose}>
         <div onClick={(e) => e.stopPropagation()}>
-          {isSignIn ? <SignIn switchToSignUp={switchToSignUp} /> : <SignUp switchToSignIn={switchToSignIn} />}
+          {isSignIn ? (
+            <SignIn switchToSignUp={switchToSignUp} />
+          ) : (
+            <SignUp switchToSignIn={switchToSignIn} />
+          )}
         </div>
       </Modal>
       <img src={Logo} alt="" className="logo" />
@@ -99,9 +117,20 @@ const Header = () => {
               Exercise
             </LinkRoute>
           </li>
-          <li>
-            <Link onClick={handleOpen}>Sign In</Link>
-          </li>
+          {loggedIn ? (
+            <>
+              <li>
+                <Link>DashBoard</Link>
+              </li>
+              <li>
+                <Link onClick={logout}>Log Out</Link>
+              </li>
+            </>
+          ) : (
+            <li>
+              <Link onClick={handleOpen}>Sign In</Link>
+            </li>
+          )}
         </ul>
       )}
     </div>
