@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field, EmailStr
-
+from datetime import datetime
 
 class registerSchema(BaseModel):
     name: str
@@ -15,4 +15,6 @@ class loginSchema(BaseModel):
 class exerciseSchema(BaseModel):
     userID: str
     count: int
+    calories: float
     exercise: str
+    date: datetime

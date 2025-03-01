@@ -23,6 +23,7 @@ app.add_middleware(
 client = MongoClient(os.getenv("DB_URL"))
 db = client["fitfusion"]
 users = db["users"]
+exData = db["exData"]
 secret = os.getenv("key")
 
 
@@ -54,8 +55,13 @@ def login(data: loginSchema):
 
 
 @app.post("/addData")
-async def addData():
-    pass
+async def addData(data: exerciseSchema):
+    data = data.dict()
+    userID = user.find_one({"email": data.email}).dict()
+    data["userID"] = userID.get("_id")
+    del data["email"]
+    result = exData.insert_one(data)
+    return JSONResponse(content={"message": "Success"})
 
 
 @app.post("/cv/dumbell")
