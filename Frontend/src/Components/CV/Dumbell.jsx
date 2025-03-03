@@ -8,6 +8,7 @@ import { Button } from "@mui/material";
 const Dumbell = () => {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
+  const hasStopped = useRef(false);
   const [processedImage, setProcessedImage] = useState(noCamera);
   const [count, setCount] = useState(0);
   const [calories, setCalories] = useState(0);
@@ -123,7 +124,8 @@ const Dumbell = () => {
       timer = setInterval(() => {
         setTimeLeft((prevTime) => prevTime - 1);
       }, 1000);
-    } else if (timeLeft === 0) {
+    } else if (timeLeft === 0 && !hasStopped.current) {
+      hasStopped.current = true;
       setIsActive(false);
       stop();
     }
@@ -152,7 +154,7 @@ const Dumbell = () => {
 
   const stop = async () => {
     const email = localStorage.getItem("loggedInEmail");
-    
+
     if (email === null) return;
 
     const data = JSON.stringify({
