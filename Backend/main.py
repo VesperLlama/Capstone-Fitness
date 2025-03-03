@@ -56,9 +56,9 @@ def login(data: loginSchema):
 
 @app.post("/addData")
 async def addData(data: exerciseSchema):
+    userID = users.find_one({"email": data.email})
     data = data.dict()
-    userID = user.find_one({"email": data.email}).dict()
-    data["userID"] = userID.get("_id")
+    data["userID"] = str(userID.get("_id"))
     del data["email"]
     result = exData.insert_one(data)
     return JSONResponse(content={"message": "Success"})

@@ -16,7 +16,7 @@ const Dumbell = () => {
   const [weightError, setWeightError] = useState(false);
   const [timeError, setTimeError] = useState(false);
   const [inputTime, setInputTime] = useState("05:00");
-  const [timeLeft, setTimeLeft] = useState(0);
+  const [timeLeft, setTimeLeft] = useState(300);
   const [isActive, setIsActive] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
 
@@ -90,7 +90,7 @@ const Dumbell = () => {
     } else setWeightError(false);
     if (totalSeconds <= 0) {
       setTimeError("Time not set");
-      validateFields = false;
+      validated = false;
     } else setTimeError(false);
     return validated;
   };
@@ -125,6 +125,7 @@ const Dumbell = () => {
       }, 1000);
     } else if (timeLeft === 0) {
       setIsActive(false);
+      stop();
     }
     return () => clearInterval(timer);
   }, [isActive, timeLeft]);
@@ -147,6 +148,31 @@ const Dumbell = () => {
     setCalories(0);
     setIsActive(false);
     setTimeLeft(0);
+  };
+
+  const stop = async () => {
+    const email = localStorage.getItem("loggedInEmail");
+    
+    if (email === null) return;
+
+    const data = JSON.stringify({
+      email: email,
+      count: parseInt(Math.ceil(count)),
+      calories: calories,
+      exercise: "dumbell",
+      date: new Date().toISOString(),
+    });
+
+    await fetch("http://localhost:8000/addData", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: data,
+    }).then(async (res) => {
+      const result = await res.json();
+      console.log(result.message);
+    });
   };
 
   return (

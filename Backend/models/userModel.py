@@ -4,7 +4,7 @@ from datetime import datetime
 class registerSchema(BaseModel):
     name: str
     password: str = Field(min_length=6)
-    email: str
+    email: EmailStr
 
 
 class loginSchema(BaseModel):
@@ -13,7 +13,7 @@ class loginSchema(BaseModel):
 
 
 class exerciseSchema(BaseModel):
-    userID: str
+    email: EmailStr
     count: int
     calories: float
     exercise: str
