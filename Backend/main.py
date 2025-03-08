@@ -6,6 +6,7 @@ import os
 from dotenv import load_dotenv
 from pymongo import MongoClient
 from models.userModel import registerSchema, loginSchema, exerciseSchema
+from bson.json_util import dumps
 from CV_models.dumbell_curl import process_frame as dumbbell
 from CV_models.Shoulderpress import process_frame as shldpress
 
@@ -62,6 +63,14 @@ async def addData(data: exerciseSchema):
     del data["email"]
     result = exData.insert_one(data)
     return JSONResponse(content={"message": "Success"})
+
+
+@app.get("/getData/{email}")
+async def getData(email):
+    getOiD = users.find_one({"email": email})
+    data = exData.find({"userID": str(getOiD.get("_id"))})
+    data = list(data)
+    return dumps(data)
 
 
 @app.post("/cv/dumbell")

@@ -120,7 +120,7 @@ const Header = () => {
           {loggedIn ? (
             <>
               <li>
-                <Link>DashBoard</Link>
+                <LinkRoute className="LinkRoute" to="/dashboard">Dashboard</LinkRoute>
               </li>
               <li>
                 <Link onClick={logout}>Log Out</Link>

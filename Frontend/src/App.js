@@ -12,6 +12,7 @@ import CVTabs from "./Components/CV/CVModels";
 import { Routes, Route } from "react-router-dom";
 import Dumbell from "./Components/CV/Dumbell";
 import ShldPress from "./Components/CV/Shld_Press";
+import Dashboard from "./Components/Dashboard/Dashboard";
 
 function App() {
   return (
@@ -33,10 +34,11 @@ function App() {
               </>
             }
           />
-          <Route path="/exercise/*" element={<CVTabs />} >
+          <Route path="/exercise/*" element={<CVTabs />}>
             <Route path="dumbell" element={<Dumbell />} />
             <Route path="shld" element={<ShldPress />} />
           </Route>
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
 
         <Footer />

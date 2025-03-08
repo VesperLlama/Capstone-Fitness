@@ -21,7 +21,7 @@ export const Join = () => {
             <hr />
             <div>
                 <span>READY FOR A</span>
-                <span class='stroke-text'> CHANGE?</span>
+                <span className='stroke-text'> CHANGE?</span>
             </div>
          </div>
 
