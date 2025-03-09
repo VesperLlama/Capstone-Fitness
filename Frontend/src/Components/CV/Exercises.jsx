@@ -5,7 +5,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import noCamera from "../../assets/noCamera.png";
 import { Button } from "@mui/material";
 
-const Dumbell = () => {
+function Exercises({ exercise }) {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const hasStopped = useRef(false);
@@ -20,6 +20,27 @@ const Dumbell = () => {
   const [timeLeft, setTimeLeft] = useState(300);
   const [isActive, setIsActive] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
+  const [MET, setMET] = useState(5);
+
+  // TODO: Change MET values
+  useEffect(() => {
+    switch (exercise) {
+      case "dumbell":
+        setMET(5);
+        break;
+      case "shldpress":
+        setMET(5);
+        break;
+      case "pushup":
+        setMET(5);
+        break;
+      case "squats":
+        setMET(5);
+        break;
+      default:
+        break;
+    }
+  }, []);
 
   // Initialize the webcam feed
   useEffect(() => {
@@ -62,7 +83,7 @@ const Dumbell = () => {
     const formData = new FormData();
     formData.append("file", imageBlob, "frame.jpg");
 
-    const response = await fetch("http://localhost:8000/cv/dumbell", {
+    const response = await fetch("http://localhost:8000/cv/" + exercise, {
       method: "POST",
       body: formData,
     });
@@ -140,6 +161,7 @@ const Dumbell = () => {
     }
   }, [timeLeft]);
 
+  // Calories calculation
   useEffect(() => {
     setCalories(5 * weight * ((totalSeconds - timeLeft) / 3600).toFixed(2));
   }, [count]);
@@ -269,6 +291,6 @@ const Dumbell = () => {
       </div>
     </Container>
   );
-};
+}
 
-export default Dumbell;
+export default Exercises;

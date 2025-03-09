@@ -113,7 +113,7 @@ const Header = () => {
             </Link>
           </li>
           <li>
-            <LinkRoute className="LinkRoute" to="/Exercise">
+            <LinkRoute className="LinkRoute" to="/exercise/dumbell">
               Exercise
             </LinkRoute>
           </li>

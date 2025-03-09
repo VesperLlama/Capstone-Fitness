@@ -10,8 +10,7 @@ import { Testimonials } from "./Components/Testimonials/Testimonials";
 import { Trainers } from "./Components/Trainers/Trainers";
 import CVTabs from "./Components/CV/CVModels";
 import { Routes, Route } from "react-router-dom";
-import Dumbell from "./Components/CV/Dumbell";
-import ShldPress from "./Components/CV/Shld_Press";
+import Exercises from "./Components/CV/Exercises";
 import Dashboard from "./Components/Dashboard/Dashboard";
 
 function App() {
@@ -35,8 +34,14 @@ function App() {
             }
           />
           <Route path="/exercise/*" element={<CVTabs />}>
-            <Route path="dumbell" element={<Dumbell />} />
-            <Route path="shld" element={<ShldPress />} />
+            <Route
+              path="dumbell"
+              element={<Exercises key={"dumbell"} exercise={"dumbell"} />}
+            />
+            <Route
+              path="shld"
+              element={<Exercises key={"shldpress"} exercise={"shldpress"} />}
+            />
           </Route>
           <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
