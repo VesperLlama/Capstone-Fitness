@@ -38,7 +38,7 @@ const Reasons = () => {
               feedback, ensuring proper form and reducing the risk of injury.
               This innovation not only enhances personal health and well-being
               but also promotes a more active and mindful society. By making
-              advanced fitness solutions accessibl
+              advanced fitness solutions accessible.
             </span>
           </div>
           <div>

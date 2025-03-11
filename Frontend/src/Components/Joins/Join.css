@@ -7,7 +7,7 @@
 
 .left-j{
     color: white;
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: bold;
     text-transform: uppercase;
     position: relative;
@@ -24,34 +24,11 @@
 .left-j>div{
     display: flex;
     gap: 1rem;
-
+    flex-direction: column;
 }
 
-.right-j{
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-}
-
-.email-container{
-    display: flex;
-    gap: 3rem;
-    background-color: gray;
-    padding: 1rem 2rem;
-}
-.email-container>input{
-    background-color: transparent;
-    border: none;
-    outline: blueviolet;
-    color:  var(--lightgray);
-}
-::placeholder{
-    color: var(--lightgray);
-}
-
-.btn-j{
-    background-color: brown;
-    color: white;
+.left-j>div>:nth-child(2) {
+    font-size: 1.5rem;
 }
 
 
@@ -66,10 +43,6 @@
     .left-j{
         font-size: 1rem;
         flex-direction: column;
-    }
-
-    .right-j{
-        padding: 2rem ;
     }
 }
 
