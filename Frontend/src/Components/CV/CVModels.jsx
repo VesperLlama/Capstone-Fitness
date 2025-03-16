@@ -27,7 +27,7 @@ const CVTabs = () => {
         <Tab label="Dumbell" value="0" LinkComponent={Link} to="/exercise/dumbell" />
         <Tab label="Shoulder Press" value="1" LinkComponent={Link} to="/exercise/shld" />
         <Tab label="Push Up" value="2" LinkComponent={Link} to="/exercise/pushup" />
-        <Tab label="Squats" value="3" LinkComponent={Link} />
+        <Tab label="Squats" value="3" LinkComponent={Link} to="/exercise/squats"/>
       </Tabs>
       <Outlet />
     </Box>

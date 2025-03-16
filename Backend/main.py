@@ -10,6 +10,7 @@ from bson.json_util import dumps
 from CV_models.dumbell_curl import process_frame as dumbbell
 from CV_models.Shoulderpress import process_frame as shldpress
 from CV_models.Push_Up_Counter import process_frame as pushUpCount
+from CV_models.squats import process_frame as squatsExercise
 
 app = FastAPI()
 load_dotenv()
@@ -96,6 +97,15 @@ async def shoulderPress(file: UploadFile = File(...)):
 async def pushUp(file: UploadFile = File(...)):
     contents = await file.read()
     img_str, count = pushUpCount(contents)
+    return JSONResponse(
+        content={"image": f"data:image/jpeg;base64,{img_str}", "count": count}
+    )
+
+
+@app.post("/cv/squats")
+async def pushUp(file: UploadFile = File(...)):
+    contents = await file.read()
+    img_str, count = squatsExercise(contents)
     return JSONResponse(
         content={"image": f"data:image/jpeg;base64,{img_str}", "count": count}
     )
