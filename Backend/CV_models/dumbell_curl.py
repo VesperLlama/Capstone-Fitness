@@ -47,15 +47,14 @@ def process_frame(contents):
     count = 0
     dir = 0
 
-    # with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
     # ret, frame = cap.read()
     nparr = np.frombuffer(contents, np.uint8)
     img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
 
     # Recolor image to RGB
-    # img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     results = pose.process(img)
-    # img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+    img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
 
     if results.pose_landmarks:
         lmList = []
@@ -168,7 +167,7 @@ def process_frame(contents):
             # cv2.putText(img, timer_text, (x + padding, y), font, font_scale, (0, 255, 0), thickness, cv2.LINE_AA)
 
     # Convert back to BGR for displaying in OpenCV
-    # img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+    # img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
     _, buffer = cv2.imencode(".jpg", img)
     img_str = base64.b64encode(buffer).decode("utf-8")

@@ -42,6 +42,10 @@ function App() {
               path="shld"
               element={<Exercises key={"shldpress"} exercise={"shldpress"} />}
             />
+            <Route
+              path="pushup"
+              element={<Exercises key={"pushUp"} exercise={"pushup"} />}
+            />
           </Route>
           <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
