@@ -21,6 +21,35 @@ function Exercises({ exercise }) {
   const [isActive, setIsActive] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [MET, setMET] = useState(5);
+  const ws = useRef(null);
+
+  useEffect(() => {
+    ws.current = new WebSocket(`ws://localhost:8000/cv/${exercise}`);
+
+    ws.current.onopen = () => {
+      console.log("WebSocket connection established.");
+    };
+
+    ws.current.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      setProcessedImage(data.image);
+      setCount((prevCount) => prevCount + data.count);
+    };
+
+    ws.current.onerror = (error) => {
+      console.error("WebSocket error:", error);
+    };
+
+    ws.current.onclose = () => {
+      console.log("WebSocket connection closed.");
+    };
+
+    return () => {
+      if (ws.current) {
+        ws.current.close();
+      }
+    };
+  }, []);
 
   // TODO: Change MET values
   useEffect(() => {
@@ -80,22 +109,14 @@ function Exercises({ exercise }) {
   };
 
   const sendFrameToServer = async (imageBlob) => {
-    const formData = new FormData();
-    formData.append("file", imageBlob, "frame.jpg");
-
-    const response = await fetch("http://localhost:8000/cv/" + exercise, {
-      method: "POST",
-      body: formData,
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-      setProcessedImage(data.image);
-
-      setCount((prevCount) => prevCount + data.count);
-    } else {
-      console.error("Error processing frame:", response.statusText);
-    }
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const base64String = reader.result.split(",")[1];
+      if (ws.current && ws.current.readyState === WebSocket.OPEN) {
+        ws.current.send(base64String);
+      }
+    };
+    reader.readAsDataURL(imageBlob);
   };
 
   // Timer

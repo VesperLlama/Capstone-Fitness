@@ -1,14 +1,15 @@
-from fastapi import FastAPI, File, UploadFile, Form
+from fastapi import FastAPI, File, UploadFile, Form, WebSocket, WebSocketDisconnect
 from fastapi.responses import Response, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 import jwt
 import os
+import base64
 from dotenv import load_dotenv
 from pymongo import MongoClient
 from models.userModel import registerSchema, loginSchema, exerciseSchema
 from bson.json_util import dumps
-from CV_models.dumbell_curl import process_frame as dumbbell
-from CV_models.Shoulderpress import process_frame as shldpress
+from CV_models.dumbell_curl import process_frame as dumbbellExercise
+from CV_models.Shoulderpress import process_frame as shldpressExercise
 from CV_models.Push_Up_Counter import process_frame as pushUpCount
 from CV_models.squats import process_frame as squatsExercise
 
@@ -75,37 +76,69 @@ async def getData(email):
     return dumps(data)
 
 
-@app.post("/cv/dumbell")
-async def dumbell(file: UploadFile = File(...)):
-    contents = await file.read()
-    img_str, count = dumbbell(contents)
-    return JSONResponse(
-        content={"image": f"data:image/jpeg;base64,{img_str}", "count": count}
-    )
+@app.websocket("/cv/dumbell")
+async def dumbell(websocket: WebSocket):
+    await websocket.accept()
+    try:
+        while True:
+            data = await websocket.receive_text()
+            frame_data = base64.b64decode(data)
+            processed_img_str, count = dumbbellExercise(frame_data)
+            response = {
+                "image": f"data:image/jpeg;base64,{processed_img_str}",
+                "count": count,
+            }
+            await websocket.send_json(response)
+    except WebSocketDisconnect as e:
+        print(f"Connection error: {e}")
 
 
-@app.post("/cv/shldpress")
-async def shoulderPress(file: UploadFile = File(...)):
-    contents = await file.read()
-    img_str, count = shldpress(contents)
-    return JSONResponse(
-        content={"image": f"data:image/jpeg;base64,{img_str}", "count": count}
-    )
+@app.websocket("/cv/shldpress")
+async def shldpress(websocket: WebSocket):
+    await websocket.accept()
+    try:
+        while True:
+            data = await websocket.receive_text()
+            frame_data = base64.b64decode(data)
+            processed_img_str, count = shldpressExercise(frame_data)
+            response = {
+                "image": f"data:image/jpeg;base64,{processed_img_str}",
+                "count": count,
+            }
+            await websocket.send_json(response)
+    except WebSocketDisconnect as e:
+        print(f"Connection error: {e}")
 
 
-@app.post("/cv/pushup")
-async def pushUp(file: UploadFile = File(...)):
-    contents = await file.read()
-    img_str, count = pushUpCount(contents)
-    return JSONResponse(
-        content={"image": f"data:image/jpeg;base64,{img_str}", "count": count}
-    )
+@app.websocket("/cv/pushup")
+async def pushUp(websocket: WebSocket):
+    await websocket.accept()
+    try:
+        while True:
+            data = await websocket.receive_text()
+            frame_data = base64.b64decode(data)
+            processed_img_str, count = pushUpCount(frame_data)
+            response = {
+                "image": f"data:image/jpeg;base64,{processed_img_str}",
+                "count": count,
+            }
+            await websocket.send_json(response)
+    except WebSocketDisconnect as e:
+        print(f"Connection error: {e}")
 
 
-@app.post("/cv/squats")
-async def pushUp(file: UploadFile = File(...)):
-    contents = await file.read()
-    img_str, count = squatsExercise(contents)
-    return JSONResponse(
-        content={"image": f"data:image/jpeg;base64,{img_str}", "count": count}
-    )
+@app.websocket("/cv/squats")
+async def squats(websocket: WebSocket):
+    await websocket.accept()
+    try:
+        while True:
+            data = await websocket.receive_text()
+            frame_data = base64.b64decode(data)
+            processed_img_str, count = squatsExercise(frame_data)
+            response = {
+                "image": f"data:image/jpeg;base64,{processed_img_str}",
+                "count": count,
+            }
+            await websocket.send_json(response)
+    except WebSocketDisconnect as e:
+        print(f"Connection error: {e}")
