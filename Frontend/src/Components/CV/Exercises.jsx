@@ -51,7 +51,6 @@ function Exercises({ exercise }) {
     };
   }, []);
 
-  // TODO: Change MET values
   useEffect(() => {
     switch (exercise) {
       case "dumbell":
@@ -204,8 +203,9 @@ function Exercises({ exercise }) {
       email: email,
       count: parseInt(Math.ceil(count)),
       calories: calories,
-      exercise: "dumbell",
+      exercise: exercise,
       date: new Date().toISOString(),
+      weight: weight,
     });
 
     await fetch("http://localhost:8000/addData", {

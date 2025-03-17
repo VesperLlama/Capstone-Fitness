@@ -62,6 +62,13 @@ const Dashboard = () => {
     },
   });
 
+  const exercises = {
+    "dumbell": "Dumbell Curls",
+    "shldpress": "Shoulder Press",
+    "pushup": "Push Ups",
+    "squats": "Squats",
+  }
+
   return (
     <ThemeProvider theme={darkTheme}>
       <Container sx={{ marginTop: 4 }}>
@@ -109,7 +116,7 @@ const Dashboard = () => {
                     {filteredData.map((record, index) => (
                       <ListItem key={index} divider>
                         <ListItemText
-                          primary={`${record.exercise}`}
+                          primary={`${exercises[record.exercise]}`}
                           secondary={
                             <Typography
                               component="span"
@@ -121,6 +128,8 @@ const Dashboard = () => {
                               {`Calories Burnt: ${record.calories} on ${dayjs(
                                 record.date
                               ).format("h:mm A")}`}
+                              <br />
+                              {`Weight: ${record.weight} kg`}
                             </Typography>
                           }
                         />

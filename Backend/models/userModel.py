@@ -18,3 +18,4 @@ class exerciseSchema(BaseModel):
     calories: float
     exercise: str
     date: datetime
+    weight: float
