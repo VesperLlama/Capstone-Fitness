@@ -61,7 +61,7 @@ function Exercises({ exercise }) {
         setMET(5);
         break;
       case "pushup":
-        setMET(5);
+        setMET(8);
         break;
       case "squats":
         setMET(5);
@@ -184,7 +184,7 @@ function Exercises({ exercise }) {
 
   // Calories calculation
   useEffect(() => {
-    setCalories(5 * weight * ((totalSeconds - timeLeft) / 3600).toFixed(2));
+    setCalories(MET * weight * ((totalSeconds - timeLeft) / 3600).toFixed(2));
   }, [count]);
 
   const reset = () => {
