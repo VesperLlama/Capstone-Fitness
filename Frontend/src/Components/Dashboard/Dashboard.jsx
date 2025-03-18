@@ -27,7 +27,6 @@ const Dashboard = () => {
     }).then(async (res) => {
       if (res.ok) {
         const data = await res.json();
-        console.log(data);
         setExerciseData(JSON.parse(data));
       }
     });
@@ -50,7 +49,6 @@ const Dashboard = () => {
 
   const filteredData = useMemo(() => {
     return exerciseData.filter((record) => {
-      console.log(record.date.$date);
       const recordDate = dayjs(record.date.$date);
       return isSameDay(recordDate, selectedDate);
     });
@@ -126,7 +124,7 @@ const Dashboard = () => {
                               {`Count: ${record.count}`}
                               <br />
                               {`Calories Burnt: ${record.calories} on ${dayjs(
-                                record.date
+                                record.date.$date
                               ).format("h:mm A")}`}
                               <br />
                               {`Weight: ${record.weight} kg`}
