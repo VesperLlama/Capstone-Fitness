@@ -24,7 +24,7 @@ function Exercises({ exercise }) {
   const ws = useRef(null);
 
   useEffect(() => {
-    ws.current = new WebSocket(`ws://localhost:8000/cv/${exercise}`);
+    ws.current = new WebSocket(`${process.env.REACT_APP_WS_URL}cv/${exercise}`);
 
     ws.current.onopen = () => {
       console.log("WebSocket connection established.");
@@ -208,7 +208,7 @@ function Exercises({ exercise }) {
       weight: weight,
     });
 
-    await fetch("http://localhost:8000/addData", {
+    await fetch(`${process.env.REACT_APP_API_URL}addData`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

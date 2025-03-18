@@ -22,7 +22,7 @@ const Dashboard = () => {
   useEffect(() => {
     const email = localStorage.getItem("loggedInEmail");
 
-    fetch("http://localhost:8000/getData/" + email, {
+    fetch(`${process.env.REACT_APP_API_URL}getData/` + email, {
       method: "GET",
     }).then(async (res) => {
       if (res.ok) {
@@ -123,7 +123,7 @@ const Dashboard = () => {
                             >
                               {`Count: ${record.count}`}
                               <br />
-                              {`Calories Burnt: ${record.calories} on ${dayjs(
+                              {`Calories Burnt: ${record.calories} at ${dayjs(
                                 record.date.$date
                               ).format("h:mm A")}`}
                               <br />
