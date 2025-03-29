@@ -68,8 +68,8 @@ def process_frame(contents):
             angle = calculate_angle(img, 11, 13, 15, lmList)
             angle_shoulder = calculate_angle(img, 13, 11, 23, lmList)
 
-            per = np.interp(angle, (210, 310), (0, 100))
-            bar = np.interp(angle, (220, 310), (h * 0.9, h * 0.1))
+            per = np.interp(angle, (50, 145), (100, 0))
+            bar = np.interp(angle, (50, 145), (h * 0.1, h * 0.9))
 
             # Check for dumbbell curls
             color = (255, 0, 255)
@@ -89,7 +89,7 @@ def process_frame(contents):
             bar_x_start = int(w * 0.9)
             bar_x_end = int(w * 0.95)
             cv2.rectangle(
-                img, (bar_x_start, int(h * 0.1)), (bar_x_end, int(bar)), color, 3
+                img, (bar_x_start, int(h * 0.1)), (bar_x_end, int(h * 0.9)), color, 3
             )
             cv2.rectangle(
                 img,
@@ -110,43 +110,29 @@ def process_frame(contents):
             )
 
             # Draw the background rectangle dynamically
-            count_text = str(int(count))
-            font = cv2.FONT_HERSHEY_SIMPLEX
-            font_scale = 3
-            thickness = 5
+            # count_text = str(int(count))
+            # font = cv2.FONT_HERSHEY_SIMPLEX
+            # font_scale = 3
+            # thickness = 5
 
             # Calculate text size
-            text_size = cv2.getTextSize(count_text, font, font_scale, thickness)[0]
+            # text_size = cv2.getTextSize(count_text, font, font_scale, thickness)[0]
 
             # Define box padding
-            padding_x, padding_y = 20, 20  # Adjust as needed
-            box_x, box_y = 30, 600  # Top-left position of the box
-            box_width = text_size[0] + 2 * padding_x
-            box_height = text_size[1] + 2 * padding_y
+            # padding_x, padding_y = 20, 20  # Adjust as needed
+            # box_x, box_y = 30, 600  # Top-left position of the box
+            # box_width = text_size[0] + 2 * padding_x
+            # box_height = text_size[1] + 2 * padding_y
 
             # Draw the background rectangle
-            cv2.rectangle(
-                img,
-                (box_x, box_y),
-                (box_x + box_width, box_y + box_height),
-                (0, 0, 0),
-                cv2.FILLED,
-            )
+            # cv2.rectangle(img, (box_x, box_y), (box_x + box_width, box_y + box_height), (0, 0, 0), cv2.FILLED)
 
             # Calculate text position (centered inside the box)
-            text_x = box_x + padding_x
-            text_y = box_y + text_size[1] + padding_y
+            # text_x = box_x + padding_x
+            # text_y = box_y + text_size[1] + padding_y
 
             # Draw the count text
-            cv2.putText(
-                img,
-                count_text,
-                (text_x, text_y),
-                font,
-                font_scale,
-                (0, 255, 0),
-                thickness,
-            )
+            # cv2.putText(img, count_text, (text_x, text_y), font, font_scale, (0, 255, 0), thickness)
 
             # Calculate text size
             # font = cv2.FONT_HERSHEY_SIMPLEX

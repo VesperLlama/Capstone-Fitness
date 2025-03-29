@@ -92,7 +92,7 @@ def process_frame(contents):
             x_left_end = int(width * 0.08)
 
             y_top = int(height * 0.14)
-            y_bottom = int(height * 0.95)
+            y_bottom = int(height * 0.9)
 
             # Right Bar
             cv2.rectangle(
@@ -151,24 +151,10 @@ def process_frame(contents):
             box_width = text_size[0] + 2 * padding_x
             box_height = text_size[1] + 2 * padding_y
 
-            cv2.rectangle(
-                frame,
-                (box_x, box_y),
-                (box_x + box_width, box_y + box_height),
-                (0, 0, 0),
-                cv2.FILLED,
-            )
-            text_x = box_x + padding_x
-            text_y = box_y + text_size[1] + padding_y
-            cv2.putText(
-                frame,
-                count_text,
-                (text_x, text_y),
-                font,
-                font_scale,
-                (0, 255, 0),
-                thickness,
-            )
+            # cv2.rectangle(frame, (box_x, box_y), (box_x + box_width, box_y + box_height), (0, 0, 0), cv2.FILLED)
+            # text_x = box_x + padding_x
+            # text_y = box_y + text_size[1] + padding_y
+            # cv2.putText(frame, count_text, (text_x, text_y), font, font_scale, (0, 255, 0), thickness)
 
     _, buffer = cv2.imencode(".jpg", frame)
     img_str = base64.b64encode(buffer).decode("utf-8")
