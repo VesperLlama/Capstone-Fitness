@@ -99,7 +99,7 @@ def process_frame(contents):
             cv2.putText(
                 img,
                 f"{int(per)}%",
-                (int(w * 0.88), int(h * 0.05)),
+                (int(w * 0.90), int(h * 0.05)),
                 cv2.FONT_HERSHEY_SIMPLEX,
                 0.8,
                 color,

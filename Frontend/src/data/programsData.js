@@ -14,6 +14,7 @@ export const programsData = [
     heading: "Dumbell Curls",
     details:
       "In this program, AI will count and detect your postures while doing dumbell curls",
+    url: "dumbell",
   },
   {
     image: (
@@ -36,6 +37,7 @@ export const programsData = [
     heading: "Shoulder Press",
     details:
       "In this program, AI will count and detect your postures while doing Shoulder press",
+    url: "shld",
   },
   {
     image: (
@@ -68,6 +70,7 @@ export const programsData = [
     heading: "Push Ups",
     details:
       "In this program, AI will count and detect your postures while doing Push Ups",
+    url: "pushup",
   },
   {
     image: (
@@ -100,5 +103,6 @@ export const programsData = [
     heading: "Squats",
     details:
       "In this program, AI will count and detect your posture while doing Squats.",
+    url: "squats",
   },
 ];
