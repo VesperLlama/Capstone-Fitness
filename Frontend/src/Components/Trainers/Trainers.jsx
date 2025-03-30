@@ -37,7 +37,7 @@ export const Trainers = () => {
              <div className="arrows">
                   <img 
                   onClick={()=>{
-                    selected == 0
+                    selected === 0
                     ? setSelected(tLength-1)
                     : setSelected((prev) => prev - 1);
                   }}
