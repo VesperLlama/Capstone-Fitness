@@ -7,7 +7,7 @@ import base64
 mp_drawing = mp.solutions.drawing_utils
 mp_pose = mp.solutions.pose
 pose = mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5)
-
+dir = 0
 
 def calculate_angle(img, p1, p2, p3, lmList):
     # Get the landmarks
@@ -43,11 +43,9 @@ def calculate_angle(img, p1, p2, p3, lmList):
 
 # Setup Mediapipe instance
 def process_frame(contents):
-    global pose
+    global pose, dir
     count = 0
-    dir = 0
 
-    # ret, frame = cap.read()
     nparr = np.frombuffer(contents, np.uint8)
     img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
 
@@ -73,7 +71,7 @@ def process_frame(contents):
 
             # Check for dumbbell curls
             color = (255, 0, 255)
-            if angle_shoulder >= 0 and angle_shoulder <= 20:
+            if angle_shoulder >= 30 and angle_shoulder <= 50:
                 if per == 100:
                     color = (0, 255, 0)
                     if dir == 0:
