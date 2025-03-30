@@ -23,12 +23,12 @@
     padding-right: 2rem;
 }
 
-.LinkRoute {
+.LinkRoute, a {
     color: white;
     text-decoration: none;
 }
 
-.LinkRoute:hover {
+.LinkRoute:hover, a:hover {
     cursor: pointer;
     color: var(--orange);
 }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Header.css";
 import Logo from "./VIFNXlogo.webp";
 import Bars from "../../../assets/bars.png";
-import { Link } from "react-scroll";
+import { HashLink as Link } from "react-router-hash-link";
 import { Link as LinkRoute } from "react-router-dom";
 import Modal from "@mui/material/Modal";
 import SignIn from "../../Account/SignIn";
@@ -64,7 +64,7 @@ const Header = () => {
           <li>
             <Link
               onClick={() => setMenuOpened(false)}
-              to="home"
+              to="/"
               span={true}
               smooth={true}
             >
@@ -74,7 +74,7 @@ const Header = () => {
           <li>
             <Link
               onClick={() => setMenuOpened(false)}
-              to="programs"
+              to="/#programs"
               span={true}
               smooth={true}
             >
@@ -85,7 +85,7 @@ const Header = () => {
           <li>
             <Link
               onClick={() => setMenuOpened(false)}
-              to="reasons"
+              to="/#reasons"
               span={true}
               smooth={true}
             >
@@ -95,7 +95,7 @@ const Header = () => {
           <li>
             <Link
               onClick={() => setMenuOpened(false)}
-              to="PLANs"
+              to="/#PLANs"
               span={true}
               smooth={true}
             >
@@ -105,7 +105,7 @@ const Header = () => {
           <li>
             <Link
               onClick={() => setMenuOpened(false)}
-              to="Testimonials"
+              to="/#Testimonials"
               span={true}
               smooth={true}
             >

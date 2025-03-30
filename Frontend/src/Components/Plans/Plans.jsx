@@ -3,7 +3,7 @@ import './Plans.css'
 import { plansData } from '../../data/plansData';
 export const Plans = () => {
   return (
-      <div className="plans-container">
+      <div className="plans-container" id="PLANs">
         <div className="programs-header" style={{gap: '2rem'}}>
         {/* TRANSFORM YOUR LIFE WITH FITFUSION: */}
         {/* EMBRACE OUR REVITALIZING DIET PLAN */}
@@ -13,7 +13,7 @@ export const Plans = () => {
         </div>
 
            {/* Plans card */}
-           <div className="plans" id="PLANs">
+           <div className="plans">
                {plansData.map((plan, i)=>(
                 <div className="plan">
                     {plansData.icon}
