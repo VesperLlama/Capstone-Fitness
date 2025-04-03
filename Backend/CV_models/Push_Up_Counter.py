@@ -13,7 +13,6 @@ pose = mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5)
 progress = 0
 going_down = False
 going_up = False
-rep_count = 0
 start_time = time.time()
 rep_start_time = None
 rep_duration = 0
@@ -30,7 +29,8 @@ def calculate_angle(a, b, c):
     return angle
 
 def process_frame(contents):
-    global rep_count, progress, going_down, going_up, rep_start_time, rep_duration, switch_percentage, start_time
+    global progress, going_down, going_up, rep_start_time, rep_duration, switch_percentage, start_time
+    rep_count = 0
 
     # Decode image from input bytes
     nparr = np.frombuffer(contents, np.uint8)
@@ -134,7 +134,7 @@ def process_frame(contents):
         if going_down and progress == 0:
             going_up = True
         if going_down and going_up:
-            rep_count += 1
+            rep_count = 1
             going_down = False
             going_up = False
 
