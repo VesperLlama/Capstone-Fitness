@@ -13,7 +13,6 @@ pose = mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5)
 squat_progress = 0
 squat_down = False
 squat_up = False
-rep_count = 0
 
 # Start workout timer
 start_time = time.time()
@@ -35,7 +34,8 @@ def calculate_angle(a, b, c):
     return angle
 
 def process_frame(contents):
-    global pose, squat_progress, squat_down, squat_up, rep_count, switch_percentage, start_time
+    global pose, squat_progress, squat_down, squat_up, switch_percentage, start_time
+    rep_count = 0
 
     nparr = np.frombuffer(contents, np.uint8)
     frame = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
@@ -76,7 +76,7 @@ def process_frame(contents):
         if squat_down and squat_progress == 0:
             squat_up = True
         if squat_down and squat_up:
-            rep_count += 1
+            rep_count = 1
             squat_down = False
             squat_up = False
 
